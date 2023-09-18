@@ -15,6 +15,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\MAFSHAR\Documents\GitHub\WEB452-SEC002-F23\MvcMovie
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/MAFSHAR/Documents/GitHub/WEB452-SEC002-F23/MvcMovie/Views/Example/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXhhbXBsZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/MAFSHAR/Documents/GitHub/WEB452-SEC002-F23/MvcMovie/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
