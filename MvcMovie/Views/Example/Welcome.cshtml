@@ -1,0 +1,21 @@
+@{
+    ViewData["Title"] = "Welcome Page";
+}
+ 
+<h2> Welcome </h2>
+
+<p> Hello , this is a test for Welcome page </p>
+
+<form action="/Example/Welcome" method="get">
+    <label for="name"> Enter Name: </label>
+    <input type="text" id="name" name="name" placeholder="Your Name">
+    <label for="num"> Enter Number: </label>
+    <input type="Number" id="num" name="num" placeholder="Any Number">
+    <button type="submit">Submit</button>
+</form>
+<ul>
+    @for(int i = 0; i<(int)ViewData["Number"]; i++ )
+    {
+        <li>@ViewData["Message"] </li>
+    }
+</ul>
