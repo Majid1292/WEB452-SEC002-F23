@@ -75,7 +75,7 @@ namespace MvcMovie.Controllers
             var movie = await _context.Movie.FindAsync(id);
             if (movie == null)
             {
-                return NotFound();
+                return View("../Example/Index");
             }
             return View(movie);
         }
