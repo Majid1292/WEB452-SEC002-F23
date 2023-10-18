@@ -1,0 +1,33 @@
+@model List<MvcMovie.Models.TodoItem>
+
+@{
+    ViewData["Title"] = "Todolist Page";
+}
+ 
+<form asp-controller="Example" asp-action="Todolist" method="post">
+    <label for="id"> ID: </label>
+    <input type="text" id="id" name="id">
+
+    <label for="title"> Title: </label>
+    <input type="text" id="title" name="title">
+
+    <label for="description"> Description: </label>
+    <input type="text" id="description" name="description">
+
+    <button type="submit">Submit</button>
+</form>
+
+@if (Model.Count > 0)
+{
+    <h4> Submitted Items </h4>
+    <ul>
+        @foreach (var item in Model) 
+        {
+            <li>
+                ID : @item.Id <br/>
+                Title : @item.Title <br/>
+                Description : @item.Description
+            </li>
+        }
+    </ul>
+} 

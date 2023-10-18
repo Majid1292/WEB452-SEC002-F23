@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MvcMovie.Models;
 
 namespace MvcMovie.Controllers
 {
@@ -14,6 +15,28 @@ namespace MvcMovie.Controllers
             ViewData["Message"] = "Hi " + name;
             ViewData["Number"] = num;
             return View();
+        }
+
+        private static List<TodoItem> todoItems = new List<TodoItem>();
+        
+        public IActionResult Todolist()
+        {
+            return View(todoItems);
+        }
+
+        
+        [HttpPost]
+        public IActionResult Todolist(int id,string title, string description)
+        {
+            var newItem = new TodoItem
+            {
+                Id = id,
+                Title = title,
+                Description = description
+            };
+            todoItems.Add(newItem); 
+
+            return View(todoItems);
         }
     }
 }
