@@ -19,7 +19,6 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Movies
-        // GET: Movies
 public async Task<IActionResult> Index(string movieGenre, string searchString)
     {
         // Use LINQ to get list of genres.
@@ -77,7 +76,7 @@ public async Task<IActionResult> Index(string movieGenre, string searchString)
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -99,6 +98,7 @@ public async Task<IActionResult> Index(string movieGenre, string searchString)
             var movie = await _context.Movie.FindAsync(id);
             if (movie == null)
             {
+                ViewData["Id"] = id;
                 return View("../Example/Index");
             }
             return View(movie);
@@ -109,7 +109,7 @@ public async Task<IActionResult> Index(string movieGenre, string searchString)
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price")] Movie movie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             if (id != movie.Id)
             {
