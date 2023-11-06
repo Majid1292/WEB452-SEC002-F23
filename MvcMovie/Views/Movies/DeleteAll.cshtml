@@ -1,0 +1,16 @@
+@model MvcMovie.Models.Movie
+
+@{
+    ViewData["Title"] = "DeleteAll";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete all movies?</h3>
+<div>
+    <form asp-action="DeleteAll">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="DeleteAll" class="btn btn-danger" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

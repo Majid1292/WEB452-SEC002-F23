@@ -163,10 +163,35 @@ public async Task<IActionResult> Index(string movieGenre, string searchString)
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var movie = await _context.Movie.FindAsync(id);
-            _context.Movie.Remove(movie);
+            _context.Movie.RemoveRange(movie);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+
+
+        // GET: Movies/DeleteAll
+        public async Task<IActionResult> DeleteAll()
+        {
+            return View();
+        }
+
+        // POST: Movies/DeleteAll
+        [HttpPost, ActionName("DeleteAll")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmedAll()
+        {
+             var allMovies = _context.Movie.ToList();
+            if (allMovies.Count > 0) 
+            {
+                _context.Movie.RemoveRange(allMovies);
+                await _context.SaveChangesAsync();
+            }
+
+            return RedirectToAction(nameof(Index));
+
+        }
+
+
 
         private bool MovieExists(int id)
         {
