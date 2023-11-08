@@ -190,8 +190,21 @@ public async Task<IActionResult> Index(string movieGenre, string searchString)
             return RedirectToAction(nameof(Index));
 
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteSelected(int[] selectedMovies)
+        {
 
+            var moviesToBeDeleted = _context.Movie.Where(m => selectedMovies.Contains(m.Id)).ToList();
+            if (moviesToBeDeleted.Count > 0) 
+            {
+                _context.Movie.RemoveRange(moviesToBeDeleted);
+                await _context.SaveChangesAsync();
+            }
 
+            return RedirectToAction(nameof(Index));
+            
+        }
 
         private bool MovieExists(int id)
         {
