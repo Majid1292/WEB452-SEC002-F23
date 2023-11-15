@@ -19,7 +19,7 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Movies
-public async Task<IActionResult> Index(string movieGenre, string searchString)
+public async Task<IActionResult> Index(string movieGenre, string searchString, string sortOrder)
     {
         // Use LINQ to get list of genres.
         IQueryable<string> genreQuery = from m in _context.Movie
@@ -37,6 +37,68 @@ public async Task<IActionResult> Index(string movieGenre, string searchString)
         {
             movies = movies.Where(x => x.Genre == movieGenre);
         }
+
+        ViewData["TitleSort"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+        ViewData["DateSort"] = sortOrder == "releaseDate" ? "releaseDate_desc" : "releaseDate";
+        ViewData["GenreSort"] = sortOrder == "genre" ? "genre_desc" : "genre";
+        ViewData["PriceSort"] = sortOrder == "price" ? "price_desc" : "price";
+        ViewData["RatingSort"] = sortOrder == "rating" ? "rating_desc" : "rating";
+
+        switch (sortOrder)
+        {
+            case "title_desc":        
+                movies = movies.OrderByDescending(m => m.Title);
+                break;
+            case "releaseDate":        
+            {
+                movies = movies.OrderBy(m => m.ReleaseDate);
+                break;
+            }
+            case "releaseDate_desc":        
+            {
+                movies = movies.OrderByDescending(m => m.ReleaseDate);
+                break;
+            }
+
+            case "genre":        
+            {
+                movies = movies.OrderBy(m => m.Genre);
+                break;
+            }
+
+            case "genre_desc":        
+            {
+                movies = movies.OrderByDescending(m => m.Genre);
+                break;
+            }
+            case "price":       
+            {
+                movies = movies.OrderBy(m => m.Price);
+                break;
+            }
+
+            case "price_desc":       
+            {
+                movies = movies.OrderByDescending(m => m.Price);
+                break;
+            }
+            case "rating":        
+            {
+                movies = movies.OrderBy(m => m.Rating);
+                break;
+            }
+
+            case "rating_desc":        
+            {
+                movies = movies.OrderByDescending(m => m.Rating);
+                break;
+            }
+            default:
+                 movies = movies.OrderBy(m => m.Title);
+                 break;
+
+        }
+        
 
         var movieGenreVM = new MovieGenreViewModel
         {
