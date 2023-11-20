@@ -30,19 +30,24 @@
                     <strong> Select </strong>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSort"]"> Title</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSort"]" 
+                    asp-route-searchString="@ViewData["SearchTitle"]" asp-route-movieGenre="@ViewData["SearchGenre"]"> Title</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSort"]">@Html.DisplayNameFor(model => model.Movies[0].ReleaseDate)</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSort"]" 
+                    asp-route-searchString="@ViewData["SearchTitle"]" asp-route-movieGenre="@ViewData["SearchGenre"]">@Html.DisplayNameFor(model => model.Movies[0].ReleaseDate)</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["GenreSort"]">@Html.DisplayNameFor(model => model.Movies[0].Genre)</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["GenreSort"]" 
+                    asp-route-searchString="@ViewData["SearchTitle"]" asp-route-movieGenre="@ViewData["SearchGenre"]">@Html.DisplayNameFor(model => model.Movies[0].Genre)</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSort"]">@Html.DisplayNameFor(model => model.Movies[0].Price)</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSort"]"
+                    asp-route-searchString="@ViewData["SearchTitle"]" asp-route-movieGenre="@ViewData["SearchGenre"]">@Html.DisplayNameFor(model => model.Movies[0].Price)</a>
                 </th>
                 <th>
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["RatingSort"]">@Html.DisplayNameFor(model => model.Movies[0].Rating)</a>
+                    <a asp-action="Index" asp-route-sortOrder="@ViewData["RatingSort"]"
+                    asp-route-searchString="@ViewData["SearchTitle"]" asp-route-movieGenre="@ViewData["SearchGenre"]">@Html.DisplayNameFor(model => model.Movies[0].Rating)</a>
                 </th>
                 <th></th>
             </tr>

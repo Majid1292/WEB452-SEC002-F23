@@ -38,6 +38,9 @@ public async Task<IActionResult> Index(string movieGenre, string searchString, s
             movies = movies.Where(x => x.Genre == movieGenre);
         }
 
+        ViewData["SearchTitle"] = searchString;
+        ViewData["SearchGenre"] = movieGenre;
+
         ViewData["TitleSort"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
         ViewData["DateSort"] = sortOrder == "releaseDate" ? "releaseDate_desc" : "releaseDate";
         ViewData["GenreSort"] = sortOrder == "genre" ? "genre_desc" : "genre";
