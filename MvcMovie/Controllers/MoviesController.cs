@@ -41,67 +41,10 @@ public async Task<IActionResult> Index(string movieGenre, string searchString, s
         ViewData["SearchTitle"] = searchString;
         ViewData["SearchGenre"] = movieGenre;
 
-        ViewData["TitleSort"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
-        ViewData["DateSort"] = sortOrder == "releaseDate" ? "releaseDate_desc" : "releaseDate";
-        ViewData["GenreSort"] = sortOrder == "genre" ? "genre_desc" : "genre";
-        ViewData["PriceSort"] = sortOrder == "price" ? "price_desc" : "price";
-        ViewData["RatingSort"] = sortOrder == "rating" ? "rating_desc" : "rating";
+       
 
-        switch (sortOrder)
-        {
-            case "title_desc":        
-                movies = movies.OrderByDescending(m => m.Title);
-                break;
-            case "releaseDate":        
-            {
-                movies = movies.OrderBy(m => m.ReleaseDate);
-                break;
-            }
-            case "releaseDate_desc":        
-            {
-                movies = movies.OrderByDescending(m => m.ReleaseDate);
-                break;
-            }
-
-            case "genre":        
-            {
-                movies = movies.OrderBy(m => m.Genre);
-                break;
-            }
-
-            case "genre_desc":        
-            {
-                movies = movies.OrderByDescending(m => m.Genre);
-                break;
-            }
-            case "price":       
-            {
-                movies = movies.OrderBy(m => m.Price);
-                break;
-            }
-
-            case "price_desc":       
-            {
-                movies = movies.OrderByDescending(m => m.Price);
-                break;
-            }
-            case "rating":        
-            {
-                movies = movies.OrderBy(m => m.Rating);
-                break;
-            }
-
-            case "rating_desc":        
-            {
-                movies = movies.OrderByDescending(m => m.Rating);
-                break;
-            }
-            default:
-                 movies = movies.OrderBy(m => m.Title);
-                 break;
-
-        }
         
+        movies = SortMovies(movies,sortOrder);
 
         var movieGenreVM = new MovieGenreViewModel
         {
@@ -111,6 +54,59 @@ public async Task<IActionResult> Index(string movieGenre, string searchString, s
 
         return View(movieGenreVM);
     }
+
+        private IQueryable<Movie> SortMovies(IQueryable<Movie> movies, string sortOrder)
+        {
+
+            ViewData["TitleSort"] = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewData["DateSort"] = sortOrder == "releaseDate" ? "releaseDate_desc" : "releaseDate";
+            ViewData["GenreSort"] = sortOrder == "genre" ? "genre_desc" : "genre";
+            ViewData["PriceSort"] = sortOrder == "price" ? "price_desc" : "price";
+            ViewData["RatingSort"] = sortOrder == "rating" ? "rating_desc" : "rating";
+
+            switch (sortOrder)
+            {
+                case "title_desc":        
+                    return (movies.OrderByDescending(m => m.Title));
+
+                case "releaseDate":        
+                
+                    return (movies.OrderBy(m => m.ReleaseDate));
+                
+                case "releaseDate_desc":        
+                
+                    return(movies.OrderByDescending(m => m.ReleaseDate));                
+
+                case "genre":        
+                
+                    return(movies.OrderBy(m => m.Genre));
+
+                case "genre_desc":        
+                
+                    return(movies.OrderByDescending(m => m.Genre));
+                    
+                case "price":       
+                 
+                    return(movies.OrderBy(m => (double?)m.Price));
+
+                case "price_desc":       
+                
+                    return(movies.OrderByDescending(m =>(double?)m.Price ));
+                    
+                case "rating":        
+                
+                    return(movies.OrderBy(m => m.Rating));
+
+                case "rating_desc":        
+                
+                    return(movies.OrderByDescending(m => m.Rating));
+                  
+                default:
+                   return( movies.OrderBy(m => m.Title));
+            }
+
+
+        }
 
         // GET: Movies/Details/5
         public async Task<IActionResult> Details(int? id, string? rating)
